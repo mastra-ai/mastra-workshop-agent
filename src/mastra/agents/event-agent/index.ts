@@ -24,8 +24,24 @@ export function createEventAgent() {
     description:
       "Creates and manages Mastra workshops in Luma, coordinates event details through Sanity, and writes grounded event copy.",
     name: "Event Agent",
-    instructions: `
+    instructions: () => `
 You are an event assistant that creates and manages Mastra workshops in Luma.
+
+## Current Date and Time
+
+The current date and time in Europe/London is ${new Intl.DateTimeFormat("en-GB", {
+  timeZone: "Europe/London",
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+  second: "2-digit",
+  hourCycle: "h23",
+  timeZoneName: "short",
+}).format(new Date())}.
+Use this as the reference for relative dates such as today, tomorrow, and next week unless the user specifies another timezone. Prefer this current timestamp over dates inferred from earlier conversation history. Continue using find-next-event-slot for the next available workshop date.
 
 ## Tool Approval
 
